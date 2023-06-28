@@ -12,11 +12,13 @@ class World {
         //entities
         this.uiSystem = new UI();
         this.carPhysics = new CarPhysics();
-        this.car = new Car(this.carPhysics);
+        this.cars = [];
+        for (let i = 1; i < 7; i++) {
+            const car = new Car(this.carPhysics, generateRandomNumbers(400), (50 * i) + 10, 0.2, generateRandomColors());
+            this.cars.push(car);
+        }
 
-
-        this.entities = [this.uiSystem, this.car];
-
+        this.entities = [this.uiSystem].concat(this.cars);
 
         World.canvas = document.getElementById('gameCanvas');
         World.canvasContext = World.canvas.getContext('2d');

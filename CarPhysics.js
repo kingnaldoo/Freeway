@@ -4,9 +4,8 @@ class CarPhysics {
 
         // car loop
         if (car.posX > World.canvas.width) {
-            car.posX = 0;
-        } else if (car.posX < 0)
+            car.posX = -car.width;
+        } else if (car.posX < -car.width)
             car.posX = World.canvas.width;
-
     }
 }

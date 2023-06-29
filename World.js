@@ -10,20 +10,21 @@ class World {
         this.timeStep = 1000 / this.maxFPS;
 
         //entities
+        this.player = new Player(250, 20, 20);
         this.uiSystem = new UI();
         this.carPhysics = new CarPhysics();
         this.cars = [];
         for (let i = 1; i < 7; i++) {
-            const car = new Car(this.carPhysics, generateRandomNumbers(400), (50 * i) + 10, 0.2, generateRandomColors());
+            const car = new Car(this.carPhysics, generateRandomNumbers(400), (50 * i) + 10, 50, 30, i > 3 ? 0.1 : -0.1, generateRandomColors());
             this.cars.push(car);
         }
 
-        this.entities = [this.uiSystem].concat(this.cars);
+        this.entities = [this.uiSystem, this.player].concat(this.cars);
 
         World.canvas = document.getElementById('gameCanvas');
         World.canvasContext = World.canvas.getContext('2d');
         requestAnimationFrame(this.mainLoop.bind(this));
-        this.draw();
+        window.addEventListener('keydown', Input.calculatePosition);
     }
 
     mainLoop(timeStamp) {

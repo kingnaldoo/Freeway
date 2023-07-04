@@ -13,18 +13,22 @@ class World {
         this.player = new Player(250, 20, 20);
         this.uiSystem = new UI();
         this.carPhysics = new CarPhysics();
+        this.scoreSystem = new Score();
         this.cars = [];
         for (let i = 1; i < 7; i++) {
             const car = new Car(this.carPhysics, generateRandomNumbers(400), (50 * i) + 10, 50, 30, i > 3 ? 0.1 : -0.1, generateRandomColors());
             this.cars.push(car);
         }
 
-        this.entities = [this.uiSystem, this.player].concat(this.cars);
+        this.entities = [this.uiSystem, this.player, this.scoreSystem].concat(this.cars);
 
         World.canvas = document.getElementById('gameCanvas');
         World.canvasContext = World.canvas.getContext('2d');
         requestAnimationFrame(this.mainLoop.bind(this));
-        window.addEventListener('keydown', Input.calculatePosition);
+        window.addEventListener('keydown', (e) => {
+            Input.calculatePosition(e);
+            this.scoreSystem.increment(this.player.posY);
+        });
     }
 
     mainLoop(timeStamp) {

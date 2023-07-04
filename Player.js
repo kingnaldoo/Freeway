@@ -12,7 +12,5 @@ class Player {
 
     move(world, deltaTime) {
         this.posY = Input.y;
-
-
     }
 }

@@ -1,3 +1,8 @@
+const EVENTS = {
+    PLAYER_SCORED: 'playerScored',
+    PLAYER_RUN_OVER: 'playerRunOver',
+}
+
 function generateId() {
     const timestamp = new Date().getTime();
     const randomNum = Math.floor(Math.random() * 10000);

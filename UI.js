@@ -25,4 +25,17 @@ class UI {
     move(deltaTime) {
 
     }
+
+    onNotify(ev) {
+        switch (ev) {
+            case EVENTS.PLAYER_SCORED:
+                // console.log("Achievements:  Jogador Pontuou");
+                break;
+            case EVENTS.PLAYER_RUN_OVER:
+                // console.log("Achievements: Jogador foi atropelado");
+                break;
+            default:
+                break;
+        }
+    }
 }

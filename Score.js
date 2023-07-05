@@ -1,13 +1,14 @@
-class Score {
+class Score extends Subject {
     constructor(id, score = 0, x = 10, y = 30) {
+        super();
         this.id = id;
         this.score = score;
         this.x = x;
         this.y = y;
 
-        setFirestore("users", id, {
-            score: score
-        })
+        // setFirestore("users", id, {
+        //     score: score
+        // })
     }
 
     draw() {
@@ -24,9 +25,11 @@ class Score {
         if (playerPosY <= 25) {
             this.score++;
 
-            setFirestore("users", this.id, {
-                score: this.score
-            });
+            // setFirestore("users", this.id, {
+            //     score: this.score
+            // });
+
+            super.notify(EVENTS.PLAYER_SCORED);
         }
 
     }

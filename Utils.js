@@ -1,3 +1,11 @@
+function generateId() {
+    const timestamp = new Date().getTime();
+    const randomNum = Math.floor(Math.random() * 10000);
+    const id = `${timestamp}${randomNum}`;
+
+    return id;
+}
+
 function colorRect(leftX, topY, width, height, drawColor) {
     World.canvasContext.fillStyle = drawColor;
     World.canvasContext.fillRect(leftX, topY, width, height)
@@ -28,4 +36,24 @@ function generateRandomColors() {
     }
 
     return corHexadecimal;
+}
+
+async function getFirestore(collectionName, docName) {
+    const { firestore, getDoc, doc } = await import("./firebase-config.js");
+
+    await getDoc(doc(firestore, collectionName, docName)).then((doc) => {
+        return doc;
+    });
+}
+
+async function setFirestore(collectionName, docName, data) {
+    const { firestore, doc, setDoc } = await import("./firebase-config.js");
+
+    const docRef = getFirestore(collectionName, docName);
+
+    if (docRef.exists) {
+        return await setDoc(doc(firestore, collectionName, docName), data);
+    }
+
+    await setDoc(doc(firestore, collectionName, docName), data);
 }

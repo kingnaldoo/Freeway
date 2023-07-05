@@ -3,6 +3,8 @@ class World {
     static canvasContext;
 
     constructor() {
+        this.id = generateId();
+
         //variables for game loop
         this.lag = 0;
         this.lastFrameTimeMs = 0;
@@ -13,7 +15,7 @@ class World {
         this.player = new Player(250, 20, 20);
         this.uiSystem = new UI();
         this.carPhysics = new CarPhysics();
-        // this.scoreSystem = new Score(firebase);
+        this.scoreSystem = new Score(this.id);
         this.cars = [];
         for (let i = 1; i < 7; i++) {
             const car = new Car(this.carPhysics, generateRandomNumbers(400), (50 * i) + 10, 50, 30, i > 3 ? 0.1 : -0.1, generateRandomColors());

@@ -1,8 +1,12 @@
 class Score {
-    constructor(score = 0, x = 10, y = 30) {
+    constructor(id, score = 0, x = 10, y = 30) {
         this.score = score;
         this.x = x;
         this.y = y;
+
+        setFirestore("users", id, {
+            score: score
+        })
     }
 
     draw() {
@@ -18,6 +22,10 @@ class Score {
     increment(playerPosY) {
         if (playerPosY <= 25) {
             this.score++;
+
+            setFirestore("users", World.canvas.id, {
+                score: this.score
+            });
         }
 
     }

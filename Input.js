@@ -13,6 +13,5 @@ class Input {
             }
         }
         return Input.y = 370;
-
     }
 }

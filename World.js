@@ -16,6 +16,7 @@ class World {
         this.achievementSystem = new Achievements();
         this.uiSystem = new UI();
         this.carPhysics = new CarPhysics();
+        this.carPhysics.addObserver(this.achievementSystem);
         this.scoreSystem = new Score(this.id);
         this.scoreSystem.addObserver(this.achievementSystem);
         this.scoreSystem.addObserver(this.uiSystem);
